@@ -1,10 +1,12 @@
 import javafx.application.Application;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
@@ -14,6 +16,8 @@ import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+
+import java.util.ArrayList;
 
 /**
  * @author Mathias Gnadlinger
@@ -25,6 +29,7 @@ public class Main extends Application
     {
         Application.launch(args);
     }
+
     @Override
     public void start (Stage stage)
     {
@@ -57,21 +62,40 @@ public class Main extends Application
         buttons.addAll(b1,b2);
 
 
-        EventHandler<MouseEvent> addHandler = new EventHandler<MouseEvent>()
+        EventHandler<MouseEvent> CtoF = new EventHandler<MouseEvent>()
         {
             @Override
             public void handle(MouseEvent e)
             {
+                double fahrenheit = 0;
+                double celsius = 0;
+
+                try
+                {
+                    celsius = Double.parseDouble(tf1.getText());
+                }
+                catch (Exception ex)
+                {
+                    System.out.printf("Falsche Eingabe%n");
+                }
+
+                fahrenheit = 1.8 * celsius + 32;
+
+               tf2.setText(Double.toString(fahrenheit) + " Grad Fahrenheit");
             }
         };
 
-        EventHandler<MouseEvent> saveHandler = new EventHandler<MouseEvent>()
+        EventHandler<MouseEvent> FtoC = new EventHandler<MouseEvent>()
         {
             @Override
             public void handle(MouseEvent e)
             {
+
             }
         };
+
+        b1.addEventHandler(MouseEvent.MOUSE_CLICKED,CtoF);
+
 
         //Creating a Scene
         Scene scene = new Scene(main_box,300,300);
