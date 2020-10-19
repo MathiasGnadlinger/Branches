@@ -37,6 +37,7 @@ public class Main extends Application
         main_box.setBackground(new Background(new BackgroundFill(Color.LIGHTGREY, CornerRadii.EMPTY, Insets.EMPTY)));
         ObservableList input = main_box.getChildren();
         ObservableList buttons = main_box.getChildren();
+        
 
         Label lb1 = new Label("Grad Celsius");
             lb1.setStyle("-fx-font-size:26;-fx-font-weight: bold");
@@ -91,10 +92,26 @@ public class Main extends Application
             public void handle(MouseEvent e)
             {
 
+                double fahrenheit = 0;
+                double celsius = 0;
+
+                try
+                {
+                    fahrenheit = Double.parseDouble(tf2.getText());
+                }
+                catch (Exception ex)
+                {
+                    System.out.printf("Falsche Eingabe%n");
+                }
+
+                celsius = 0.5555555555 * (fahrenheit - 32);
+
+                tf1.setText(Double.toString(celsius) + " Grad Celsius");
             }
         };
 
         b1.addEventHandler(MouseEvent.MOUSE_CLICKED,CtoF);
+        b2.addEventHandler(MouseEvent.MOUSE_CLICKED,FtoC);
 
 
         //Creating a Scene
